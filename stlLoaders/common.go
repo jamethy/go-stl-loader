@@ -17,6 +17,10 @@ type Vector3D struct {
 	Z float32
 }
 
+func readHeader(file *os.File) string {
+	return mustReadNextBytes(file, HeaderSize).String()
+}
+
 func readFaceCount(file *os.File) (faceCount uint32) {
 
 	buffer := mustReadNextBytes(file, 4)
@@ -25,6 +29,17 @@ func readFaceCount(file *os.File) (faceCount uint32) {
 	}
 
 	return faceCount
+}
+
+func readVector3D(file *os.File) (vec Vector3D) {
+
+	buffer := mustReadNextBytes(file, 12)
+
+	if err := binary.Read(buffer, binary.LittleEndian, &vec); err != nil {
+		log.Fatal("error while parsing vector", err)
+	}
+
+	return vec
 }
 
 func mustReadNextBytes(file *os.File, number int) *bytes.Buffer {
@@ -36,10 +51,6 @@ func mustReadNextBytes(file *os.File, number int) *bytes.Buffer {
 	}
 
 	return bytes.NewBuffer(data)
-}
-
-func readHeader(file *os.File) string {
-	return mustReadNextBytes(file, HeaderSize).String()
 }
 
 func mustOpenFile(path string) *os.File {

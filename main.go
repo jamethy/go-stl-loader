@@ -18,6 +18,9 @@ func main() {
 
 	start := time.Now()
 	stlLoaders.BasicRead(filePath)
-	fmt.Println("Execution time: ", time.Since(start))
+	fmt.Println("Basic Read time:", time.Since(start))
 
+	start = time.Now()
+	stlLoaders.SmartRead(filePath)
+	fmt.Println("Smart Read time:", time.Since(start))
 }
