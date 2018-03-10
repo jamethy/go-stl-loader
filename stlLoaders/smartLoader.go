@@ -24,8 +24,8 @@ func SmartRead(path string) (stlFile SmartStlFile) {
 	stlFile.FaceCount = readFaceCount(file)
 
 	stlFile.Faces = make([]SmartFace, stlFile.FaceCount)
-	stlFile.Vertices = make([]Vector3D, stlFile.FaceCount*2)
-	stlFile.IndexMap = make(map[Vector3D]int, stlFile.FaceCount*2)
+	stlFile.IndexMap = map[Vector3D]int{}
+	// TODO allocate other memory in advance?
 
 	for i := uint32(0); i < stlFile.FaceCount; i++ {
 
