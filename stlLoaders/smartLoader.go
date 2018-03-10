@@ -5,20 +5,21 @@ import (
 	"encoding/binary"
 )
 
-type Face struct {
+type SmartFace struct {
 	Normal Vector3D
-	A      Vector3D
-	B      Vector3D
-	C      Vector3D
+	A      int
+	B      int
+	C      int
 }
 
-type StlFile struct {
+type SmartStlFile struct {
 	Header    string
 	FaceCount uint32
-	Faces     []Face
+	Vertices  []Vector3D
+	Faces     []SmartFace
 }
 
-func BasicRead(path string) (stlFile StlFile) {
+func SmartRead(path string) (stlFile SmartStlFile) {
 
 	file := mustOpenFile(path)
 	defer file.Close()
@@ -26,9 +27,8 @@ func BasicRead(path string) (stlFile StlFile) {
 	stlFile.Header = readHeader(file)
 	stlFile.FaceCount = readFaceCount(file)
 
-	stlFile.Faces = make([]Face, stlFile.FaceCount)
+	stlFile.Faces = make([]SmartFace, stlFile.FaceCount)
 	for i := uint32(0); i < stlFile.FaceCount; i++ {
-
 		buffer := mustReadNextBytes(file, ChunkSize)
 
 		if err := binary.Read(buffer, binary.LittleEndian, &stlFile.Faces[i]); err != nil {
