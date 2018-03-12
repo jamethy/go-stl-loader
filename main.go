@@ -23,4 +23,8 @@ func main() {
 	start = time.Now()
 	stlLoaders.SmartRead(filePath)
 	fmt.Println("Smart Read time:", time.Since(start))
+
+	start = time.Now()
+	stlLoaders.MeshRead(filePath)
+	fmt.Println("Mesh Read time:", time.Since(start))
 }
