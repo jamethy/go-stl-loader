@@ -9,4 +9,5 @@ Here are some results for reading in an stl file with 295,645 faces and 149,281 
 | --- | --- | --- | --- |
 | C++ | 116 | 372 | [here](https://github.com/jamethy/cpp-stl-loader) |
 | Go | 758 | 1,535 | [here](https://github.com/jamethy/go-stl-loader) |
-| Java | 6,390 | 6,670 | private |
+| Java | 344 | 413 | private |
+| Javascript | 217 | dunno | [sample](https://threejs.org/examples/webgl_loader_stl.html) |
